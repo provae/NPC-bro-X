@@ -12,8 +12,8 @@ from datetime import datetime, timedelta
 
 import config
 import state as state_mod
-from content_pool import PHOTO_SCENES, TEXT_POSTS, REPLY_POOL
-from twitter_client import get_client, get_api_v1, post_text, post_photo, authenticate_test, reply_to_tweet
+from content_pool import PHOTO_SCENES, TEXT_POSTS
+from twitter_client import get_client, get_api_v1, post_text, post_photo, authenticate_test
 
 logging.basicConfig(
     level=logging.INFO,
@@ -62,58 +62,6 @@ def maybe_engage(client, state):
         logger.exception("Engagen mislukt, ga door.")
 
 
-def maybe_reply(client, state):
-    if not config.REPLY_ENABLED or not REPLY_POOL:
-        return
-    replies_today = state.get("replies_today", 0)
-    last_reply_date = state.get("last_reply_date")
-    today = datetime.utcnow().date().isoformat()
-    
-    # Reset counter als het een nieuwe dag is
-    if last_reply_date != today:
-        replies_today = 0
-        state["replies_today"] = 0
-        state["last_reply_date"] = today
-    
-    # Stop als we het limiet hebben bereikt
-    if replies_today >= config.REPLIES_PER_DAY:
-        return
-    
-    try:
-        # Haal mentions op (werkt met basis API tier)
-        mentions = client.get_users_mentions(client.get_me().data.id, max_results=10, tweet_fields=["author_id"])
-        
-        if not mentions.data:
-            return
-        
-        # Filter: reageer alleen op mentions van anderen, niet op onszelf
-        my_id = client.get_me().data.id
-        valid_mentions = [m for m in mentions.data if m.author_id != my_id]
-        
-        if not valid_mentions:
-            return
-        
-        # Kies een random mention om op te reageren
-        target_mention = random.choice(valid_mentions)
-        
-        # Kies een random reply
-        reply_idx = state_mod.pick_next(len(REPLY_POOL), "used_reply_indices", state)
-        reply_text = REPLY_POOL[reply_idx]
-        
-        # Plaats reply
-        reply_to_tweet(client, target_mention.id, reply_text)
-        
-        # Update state
-        state["replies_today"] = replies_today + 1
-        state["last_reply_date"] = today
-        state_mod.save_state(state)
-        
-        logger.info("Reply #%d van %d voor vandaag geplaatst op mention", state["replies_today"], config.REPLIES_PER_DAY)
-        
-    except Exception:
-        logger.exception("Reply mislukt, ga door.")
-
-
 def run_forever():
     config.validate()
     client = get_client()
@@ -125,7 +73,6 @@ def run_forever():
     while True:
         do_one_post(client, api_v1, state)
         maybe_engage(client, state)
-        maybe_reply(client, state)
 
         wait_minutes = random.randint(config.MIN_INTERVAL_MINUTES, config.MAX_INTERVAL_MINUTES)
         logger.info("Volgende post over %d minuten.", wait_minutes)
