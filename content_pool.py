@@ -22,6 +22,27 @@ PHOTO_SCENES = [
     ("13_confused_question.png", "npc bro doesn't know why he bought it either"),
     ("14_trophy.png", "npc bro won. npc bro is not sure at what."),
     ("15_broken_umbrella_rain.png", "npc bro's risk management, visualized"),
+    # 21 nieuwe foto-scenes
+    ("16_phone_chart.jpg", "npc bro found the chart. npc bro is not moving until it moves."),
+    ("17_trading_screen.jpg", "npc bro's trading setup. more screens than brain cells."),
+    ("18_desk_setup.jpg", "npc bro doesn't need a proper desk. npc bro needs liquidity."),
+    ("19_phone_focus.jpg", "npc bro is locked in. the chart is the only thing that matters."),
+    ("20_chart_stare.jpg", "npc bro has been staring at this chart for 4 hours. it hasn't moved. neither has npc bro."),
+    ("21_gaming_setup.jpg", "npc bro's gaming setup. also his trading setup. also his life."),
+    ("22_phone_bed.jpg", "npc bro doesn't sleep. npc bro just refreshes dexscreener horizontally."),
+    ("23_desk_chair.jpg", "npc bro's ergonomic setup: whatever was on sale at ikea."),
+    ("24_multiple_screens.jpg", "npc bro needs 6 screens to make decisions he doesn't understand."),
+    ("25_trading_pose.jpg", "npc bro's trading posture. shoulders forward, eyes glazed, phone in hand."),
+    ("26_phone_casual.jpg", "npc bro acting casual. npc bro is down 40% today."),
+    ("27_desk_work.jpg", "npc bro working hard. by watching other people make money."),
+    ("28_monitor_focus.jpg", "npc bro's monitor. npc bro's entire personality."),
+    ("29_phone_check.jpg", "npc bro checking the chart. again. for the 47th time today."),
+    ("30_trading_desk.jpg", "npc bro's command center. where dreams go to die."),
+    ("31_phone_relaxed.jpg", "npc bro relaxed. npc bro just bought the top. it's fine."),
+    ("32_desk_computer.jpg", "npc bro's computer. mostly used for refreshing twitter."),
+    ("33_monitor_setup.jpg", "npc bro's monitor setup. designed for maximum fomo induction."),
+    ("34_phone_stand.jpg", "npc bro standing. npc bro doesn't sit. npc bro doesn't think. npc bro just buys."),
+    ("35_trading_focus.jpg", "npc bro in the zone. the zone where he loses money."),
 ]
 
 # 30 tekst-only posts (definitieve pool)
