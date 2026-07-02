@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 import config
 import state as state_mod
 from content_pool import PHOTO_SCENES, TEXT_POSTS
-from twitter_client import get_client, post_text, post_photo, authenticate_test
+from twitter_client import get_client, get_api_v1, post_text, post_photo, authenticate_test
 
 logging.basicConfig(
     level=logging.INFO,
