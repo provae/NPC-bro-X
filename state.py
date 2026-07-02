@@ -18,7 +18,10 @@ def _default_state():
     return {
         "used_text_indices": [],
         "used_photo_indices": [],
+        "used_reply_indices": [],
         "last_engage_timestamp": None,
+        "replies_today": 0,
+        "last_reply_date": None,
     }
 
 

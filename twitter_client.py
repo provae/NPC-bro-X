@@ -57,3 +57,10 @@ def authenticate_test(client: tweepy.Client):
     me = client.get_me()
     logger.info("Authenticatie OK, ingelogd als: %s", me.data)
     return me
+
+
+def reply_to_tweet(client: tweepy.Client, tweet_id: str, reply_text: str):
+    """Reageer op een tweet met NPC Bro style reply."""
+    resp = client.create_tweet(text=reply_text, in_reply_to_tweet_id=tweet_id)
+    logger.info("Reply geplaatst op tweet %s: %s", tweet_id, resp.data)
+    return resp
