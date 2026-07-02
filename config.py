@@ -38,10 +38,6 @@ IMAGES_DIR = ""
 PHOTO_POST_CHANCE = _get_float("PHOTO_POST_CHANCE", 0.5)  # 50% kans op foto-post
 MIN_INTERVAL_MINUTES = _get_int("MIN_INTERVAL_MINUTES", 240)  # 4 uur
 MAX_INTERVAL_MINUTES = _get_int("MAX_INTERVAL_MINUTES", 240)  # 4 uur (precies 6 posts per dag)
-ENGAGE_INTERVAL_HOURS = _get_int("ENGAGE_INTERVAL_HOURS", 4)
-
-# --- Reply instellingen (uitgeschakeld) ---
-REPLY_ENABLED = _get_int("REPLY_ENABLED", 0) == 1  # 0 = uit
 
 # --- State-bestand (lokaal op Railway's filesystem) ---
 STATE_FILE = os.environ.get("STATE_FILE", "state.json")
