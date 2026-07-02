@@ -35,9 +35,9 @@ TARGET_ACCOUNTS = [a.strip() for a in _raw_targets.split(",") if a.strip()]
 IMAGES_DIR = ""
 
 # --- Posting-gedrag ---
-PHOTO_POST_CHANCE = _get_float("PHOTO_POST_CHANCE", 0.6)  # 60% kans op foto-post
-MIN_INTERVAL_MINUTES = _get_int("MIN_INTERVAL_MINUTES", 240)  # 4 uur minimum
-MAX_INTERVAL_MINUTES = _get_int("MAX_INTERVAL_MINUTES", 360)  # 6 uur maximum
+PHOTO_POST_CHANCE = _get_float("PHOTO_POST_CHANCE", 0.5)  # 50% kans op foto-post
+MIN_INTERVAL_MINUTES = _get_int("MIN_INTERVAL_MINUTES", 240)  # 4 uur
+MAX_INTERVAL_MINUTES = _get_int("MAX_INTERVAL_MINUTES", 240)  # 4 uur (precies 6 posts per dag)
 ENGAGE_INTERVAL_HOURS = _get_int("ENGAGE_INTERVAL_HOURS", 4)
 
 # --- State-bestand (lokaal op Railway's filesystem) ---
