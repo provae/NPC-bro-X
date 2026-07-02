@@ -80,36 +80,35 @@ def maybe_reply(client, state):
         return
     
     try:
-        # Zoek tweets met de opgegeven hashtags
-        hashtag = random.choice(config.REPLY_HASHTAGS)
-        search_results = client.search_recent_tweets(query=hashtag, max_results=10, tweet_fields=["author_id"])
+        # Haal mentions op (werkt met basis API tier)
+        mentions = client.get_users_mentions(client.get_me().data.id, max_results=10, tweet_fields=["author_id"])
         
-        if not search_results.data:
+        if not mentions.data:
             return
         
-        # Filter tweets van onszelf en replies
+        # Filter: reageer alleen op mentions van anderen, niet op onszelf
         my_id = client.get_me().data.id
-        valid_tweets = [t for t in search_results.data if t.author_id != my_id and not t.text.startswith("@")]
+        valid_mentions = [m for m in mentions.data if m.author_id != my_id]
         
-        if not valid_tweets:
+        if not valid_mentions:
             return
         
-        # Kies een random tweet om op te reageren
-        target_tweet = random.choice(valid_tweets)
+        # Kies een random mention om op te reageren
+        target_mention = random.choice(valid_mentions)
         
         # Kies een random reply
         reply_idx = state_mod.pick_next(len(REPLY_POOL), "used_reply_indices", state)
         reply_text = REPLY_POOL[reply_idx]
         
         # Plaats reply
-        reply_to_tweet(client, target_tweet.id, reply_text)
+        reply_to_tweet(client, target_mention.id, reply_text)
         
         # Update state
         state["replies_today"] = replies_today + 1
         state["last_reply_date"] = today
         state_mod.save_state(state)
         
-        logger.info("Reply #%d van %d voor vandaag geplaatst", state["replies_today"], config.REPLIES_PER_DAY)
+        logger.info("Reply #%d van %d voor vandaag geplaatst op mention", state["replies_today"], config.REPLIES_PER_DAY)
         
     except Exception:
         logger.exception("Reply mislukt, ga door.")

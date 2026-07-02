@@ -41,10 +41,8 @@ MAX_INTERVAL_MINUTES = _get_int("MAX_INTERVAL_MINUTES", 240)  # 4 uur (precies 6
 ENGAGE_INTERVAL_HOURS = _get_int("ENGAGE_INTERVAL_HOURS", 4)
 
 # --- Reply instellingen ---
-REPLY_ENABLED = _get_int("REPLY_ENABLED", 1) == 1  # 1 = aan, 0 = uit
-REPLIES_PER_DAY = _get_int("REPLIES_PER_DAY", 4)  # Aantal replies per dag
-REPLY_HASHTAGS = os.environ.get("REPLY_HASHTAGS", "#solana,#crypto,#memecoin").split(",")
-REPLY_HASHTAGS = [tag.strip() for tag in REPLY_HASHTAGS if tag.strip()]
+REPLY_ENABLED = _get_int("REPLY_ENABLED", 1) == 1  # 1 = aan, 0 = uit (reageert op mentions)
+REPLIES_PER_DAY = _get_int("REPLIES_PER_DAY", 4)  # Aantal replies per dag op mentions
 
 # --- State-bestand (lokaal op Railway's filesystem) ---
 STATE_FILE = os.environ.get("STATE_FILE", "state.json")
